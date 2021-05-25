@@ -26,6 +26,9 @@ fn main() {
 
 fn parse_string(token: String) -> () {
     let split: Vec<&str> = token.trim().split(".").collect();
+    if split.len() < 3 {
+        return invalid_token();
+    }
     let token = String::from(split[2]);
     if let Ok(mut token) = base64::decode_config(&token, base64::URL_SAFE) {
         token.truncate(token.len() - 64);
